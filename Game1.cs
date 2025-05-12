@@ -4,6 +4,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Monogame_Summative_Topics_1_5
 {
+    enum Screen
+    {
+        Intro,
+        Thief,
+        Drive,
+        End
+    }
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
