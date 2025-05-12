@@ -16,6 +16,9 @@ namespace Monogame_Summative_Topics_1_5
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Rectangle window;
+        Texture2D introScreen;
+        Screen screen;
 
         public Game1()
         {
@@ -26,6 +29,9 @@ namespace Monogame_Summative_Topics_1_5
 
         protected override void Initialize()
         {
+            window = new Rectangle(0, 0, 600, 800);
+            _graphics.PreferredBackBufferWidth = 600;
+            _graphics.PreferredBackBufferHeight = 800;
             // TODO: Add your initialization logic here
 
             base.Initialize();
