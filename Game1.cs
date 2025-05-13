@@ -16,9 +16,10 @@ namespace Monogame_Summative_Topics_1_5
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Rectangle window;
-        Texture2D introScreen;
+        Rectangle window, carRect;
+        Texture2D introScreenTexture, endScreenTexture, carThiefTexture, carTexture;
         Screen screen;
+        MouseState mouseState;
 
         public Game1()
         {
@@ -29,10 +30,14 @@ namespace Monogame_Summative_Topics_1_5
 
         protected override void Initialize()
         {
-            window = new Rectangle(0, 0, 600, 800);
-            _graphics.PreferredBackBufferWidth = 600;
-            _graphics.PreferredBackBufferHeight = 800;
+            window = new Rectangle(0, 0, 800, 600);
+            screen = Screen.Intro;
+            _graphics.PreferredBackBufferWidth = 800;
+            _graphics.PreferredBackBufferHeight = 600;
+            _graphics.ApplyChanges();
             // TODO: Add your initialization logic here
+
+            
 
             base.Initialize();
         }
@@ -42,6 +47,8 @@ namespace Monogame_Summative_Topics_1_5
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            introScreenTexture = Content.Load<Texture2D>("you wouldnt steal a car");
+            carThiefTexture = Content.Load<Texture2D>("car thief with speech");
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,7 +56,17 @@ namespace Monogame_Summative_Topics_1_5
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            mouseState = Mouse.GetState();
+
             // TODO: Add your update logic here
+
+            if (screen == Screen.Intro)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    screen = Screen.Thief;
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -59,6 +76,20 @@ namespace Monogame_Summative_Topics_1_5
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            _spriteBatch.Begin();
+
+            if (screen == Screen.Intro)
+            {
+                _spriteBatch.Draw(introScreenTexture, window, Color.White);
+            }
+
+            else if (screen == Screen.Thief)
+            {
+                _spriteBatch.Draw(carThiefTexture, window, Color.White);
+            }
+
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
