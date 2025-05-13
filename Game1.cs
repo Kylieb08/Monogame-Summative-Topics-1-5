@@ -17,7 +17,7 @@ namespace Monogame_Summative_Topics_1_5
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Rectangle window, carRect;
-        Texture2D introScreenTexture, endScreenTexture, carThiefTexture, carTexture;
+        Texture2D introScreenTexture, endScreenTexture, carThiefTexture, carTexture, drivingScreenTexture;
         Screen screen;
         MouseState mouseState;
 
@@ -37,8 +37,6 @@ namespace Monogame_Summative_Topics_1_5
             _graphics.ApplyChanges();
             // TODO: Add your initialization logic here
 
-            
-
             base.Initialize();
         }
 
@@ -49,6 +47,7 @@ namespace Monogame_Summative_Topics_1_5
             // TODO: use this.Content to load your game content here
             introScreenTexture = Content.Load<Texture2D>("you wouldnt steal a car");
             carThiefTexture = Content.Load<Texture2D>("car thief with speech");
+            drivingScreenTexture = Content.Load<Texture2D>("road");
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,6 +66,16 @@ namespace Monogame_Summative_Topics_1_5
                     screen = Screen.Thief;
                 }
             }
+
+            //Need to figure out what will switch to thief screen
+
+            //else if (screen == Screen.Thief)
+            //{
+            //    if ()
+            //    {
+            //        screen = Screen.Drive;
+            //    }
+            //}
 
             base.Update(gameTime);
         }
@@ -87,6 +96,11 @@ namespace Monogame_Summative_Topics_1_5
             else if (screen == Screen.Thief)
             {
                 _spriteBatch.Draw(carThiefTexture, window, Color.White);
+            }
+
+            else if (screen == Screen.Drive)
+            {
+                _spriteBatch.Draw(drivingScreenTexture, window, Color.White);
             }
 
             _spriteBatch.End();
