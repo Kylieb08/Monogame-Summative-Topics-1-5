@@ -48,6 +48,7 @@ namespace Monogame_Summative_Topics_1_5
             introScreenTexture = Content.Load<Texture2D>("you wouldnt steal a car");
             carThiefTexture = Content.Load<Texture2D>("car thief with speech");
             drivingScreenTexture = Content.Load<Texture2D>("road");
+            carTexture = Content.Load<Texture2D>("stolen car no bg");
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,7 +68,7 @@ namespace Monogame_Summative_Topics_1_5
                 }
             }
 
-            //Need to figure out what will switch to thief screen
+            //Will record sound, thief screen will end when sound is over
 
             //else if (screen == Screen.Thief)
             //{
