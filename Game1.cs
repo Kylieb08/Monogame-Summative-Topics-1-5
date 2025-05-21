@@ -37,7 +37,7 @@ namespace Monogame_Summative_Topics_1_5
             _graphics.PreferredBackBufferHeight = 600;
             _graphics.ApplyChanges();
             // TODO: Add your initialization logic here
-            carRect = new Rectangle(561, 330, 250, 190);
+            carRect = new Rectangle(461, 230, 350, 290);
 
             base.Initialize();
         }
@@ -50,7 +50,7 @@ namespace Monogame_Summative_Topics_1_5
             introScreenTexture = Content.Load<Texture2D>("you wouldnt steal a car");
             carThiefTexture = Content.Load<Texture2D>("car thief with speech");
             drivingScreenTexture = Content.Load<Texture2D>("road");
-            carTexture = Content.Load<Texture2D>("stolen car");
+            carTexture = Content.Load<Texture2D>("thief in car");
         }
 
         protected override void Update(GameTime gameTime)
@@ -86,8 +86,9 @@ namespace Monogame_Summative_Topics_1_5
 
             else if (screen == Screen.Drive)
             {
-                carSpeed = new Vector2();
-                carSpeed = Vector2.Zero;
+                //car movement
+                carSpeed = new Vector2(2, -1);
+                carRect.Offset(-carSpeed);
             }
 
             base.Update(gameTime);
