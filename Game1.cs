@@ -51,6 +51,7 @@ namespace Monogame_Summative_Topics_1_5
             carThiefTexture = Content.Load<Texture2D>("car thief with speech");
             drivingScreenTexture = Content.Load<Texture2D>("road");
             carTexture = Content.Load<Texture2D>("thief in car");
+            endScreenTexture = Content.Load<Texture2D>("you really did steal a car");
         }
 
         protected override void Update(GameTime gameTime)
@@ -89,6 +90,10 @@ namespace Monogame_Summative_Topics_1_5
                 //car movement
                 carSpeed = new Vector2(2, -1);
                 carRect.Offset(-carSpeed);
+                if (carRect.Y > 600)
+                {
+                    screen = Screen.End;
+                }
             }
 
             base.Update(gameTime);
@@ -116,6 +121,11 @@ namespace Monogame_Summative_Topics_1_5
             {
                 _spriteBatch.Draw(drivingScreenTexture, window, Color.White);
                 _spriteBatch.Draw(carTexture, carRect, Color.White);
+            }
+
+            else if (screen == Screen.End)
+            {
+                _spriteBatch.Draw(endScreenTexture, window, Color.White);
             }
 
             _spriteBatch.End();
