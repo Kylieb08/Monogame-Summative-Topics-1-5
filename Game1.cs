@@ -20,6 +20,7 @@ namespace Monogame_Summative_Topics_1_5
         Texture2D introScreenTexture, endScreenTexture, carThiefTexture, carTexture, drivingScreenTexture;
         Screen screen;
         MouseState mouseState;
+        Vector2 carSpeed;
 
         public Game1()
         {
@@ -36,6 +37,7 @@ namespace Monogame_Summative_Topics_1_5
             _graphics.PreferredBackBufferHeight = 600;
             _graphics.ApplyChanges();
             // TODO: Add your initialization logic here
+            carRect = new Rectangle(561, 330, 250, 190);
 
             base.Initialize();
         }
@@ -48,7 +50,7 @@ namespace Monogame_Summative_Topics_1_5
             introScreenTexture = Content.Load<Texture2D>("you wouldnt steal a car");
             carThiefTexture = Content.Load<Texture2D>("car thief with speech");
             drivingScreenTexture = Content.Load<Texture2D>("road");
-            carTexture = Content.Load<Texture2D>("stolen car no bg");
+            carTexture = Content.Load<Texture2D>("stolen car");
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,6 +59,9 @@ namespace Monogame_Summative_Topics_1_5
                 Exit();
 
             mouseState = Mouse.GetState();
+
+            //remove this later
+            this.Window.Title = "x = " + mouseState.X + ", y = " + mouseState.Y;
 
             // TODO: Add your update logic here
 
@@ -70,13 +75,20 @@ namespace Monogame_Summative_Topics_1_5
 
             //Will record sound, thief screen will end when sound is over
 
-            //else if (screen == Screen.Thief)
-            //{
-            //    if ()
-            //    {
-            //        screen = Screen.Drive;
-            //    }
-            //}
+            else if (screen == Screen.Thief)
+            {
+                //temporary condition for if statement. will be changed to sound once sound is made
+                if (mouseState.RightButton == ButtonState.Pressed)
+                {
+                    screen = Screen.Drive;
+                }
+            }
+
+            else if (screen == Screen.Drive)
+            {
+                carSpeed = new Vector2();
+                carSpeed = Vector2.Zero;
+            }
 
             base.Update(gameTime);
         }
@@ -102,6 +114,7 @@ namespace Monogame_Summative_Topics_1_5
             else if (screen == Screen.Drive)
             {
                 _spriteBatch.Draw(drivingScreenTexture, window, Color.White);
+                _spriteBatch.Draw(carTexture, carRect, Color.White);
             }
 
             _spriteBatch.End();
